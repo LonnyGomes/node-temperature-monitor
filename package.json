@@ -1,0 +1,14 @@
+{
+  "name": "node-temperature-monitor",
+  "version": "0.0.0",
+  "description": "node based temperature monitor for DHT-based sensors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-dht-sensor": "0.0.32"
+  }
+}

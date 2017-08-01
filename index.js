@@ -2,9 +2,10 @@ var sensor = require('node-dht-sensor');
 var http = require('http');
 var fs = require('fs-extra');
 
-var SENSOR_TYPE = 22;
-var SENSOR_PIN = 4;
-var SENSOR_DEVICE_NAME = 'device_name';
+var config;
+var SENSOR_TYPE;
+var SENSOR_PIN;
+var SENSOR_DEVICE_NAME;
 
 function celToFahr(celsiusVal) {
     return celsiusVal * 1.8 + 32;
@@ -31,8 +32,8 @@ function postData(deviceName, temperature, humidity) {
     const urlPath = `/api/temperature/${deviceName}/${temperature}/${humidity}`;
 
     http.get({
-            hostname: 'hostname',
-            port: 3000,
+            hostname: config.remoteHostName,
+            port: config.remotePort,
             path: urlPath
         }, (res) => {
             //console.log('posted results');
@@ -54,8 +55,18 @@ function recordReading() {
         });
 }
 
+if (!fs.pathExistsSync('./config.json')) {
+    console.error(`Missing config.json file!`
+                  `Copy example.config.json to config.json`);
+    process.exit(1);
+}
+
+config = require('./config.json');
+SENSOR_TYPE = config.sensorType;
+SENSOR_PIN = config.sensorPin;
+SENSOR_DEVICE_NAME = config.deviceName;
 
 // start temperature loop
 recordReading();
-setInterval(recordReading, 1000 * 60 * 10);
+setInterval(recordReading, config.pollingInterval);
 

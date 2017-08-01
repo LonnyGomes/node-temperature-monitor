@@ -1,0 +1,8 @@
+{
+    "sensorType": 22,
+    "sensorPin": 4,
+    "deviceName": "device_name",
+    "remoteHostName": "hostname",
+    "remotePort": 3000,
+    "pollingInterval": 600000
+}

@@ -1,5 +1,6 @@
 var sensor = require('node-dht-sensor');
 var http = require('http');
+var fs = require('fs-extra');
 
 var SENSOR_TYPE = 22;
 var SENSOR_PIN = 4;

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fs-extra": "^4.0.1",
     "node-dht-sensor": "0.0.32"
   }
 }

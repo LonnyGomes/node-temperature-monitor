@@ -4,8 +4,19 @@ A NodeJS app that monitors temperature and humidity on a DHT-based hardware sens
 
 This node app interfaces with the [home base](https://github.com/LonnyGomes/home_base) REST api to log data at set intervals.
 
-## Build
+## Prerequisites
 
+### Updating Node
+
+Before starting, make sure you're running NodeJS >= 6.x. If not, type the following to update Node:
+
+```bash
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt install nodejs
+node -v
+```
+
+### Installing BCM2835 C library
 This module depends needs to communicate with the GPIO pins on the [BCM2835 chip](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2835/README.md). You must install an userland interface availabe [here](http://www.airspayce.com/mikem/bcm2835/).
 
 After building and installing the `bcm2835` C interface, run `npm install` in top level of the project and confirm the library was found.

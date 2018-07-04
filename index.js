@@ -40,8 +40,8 @@ function recordReading() {
         .then((result) => {
             console.log(result.temperature, result.humidity);
             iot.publish(
-                result.temperature.toFixed(2),
-                result.humidity.toFixed(2));
+                Number(result.temperature.toFixed(2)),
+                Number(result.humidity.toFixed(2)));
         }, (error) => {
             console.log(error);
         });

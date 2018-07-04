@@ -2,6 +2,7 @@ let sensorLib;
 var http = require('http');
 var fs = require('fs-extra');
 const Sensor = require('./lib/Sensor');
+const IotAdaptor = require('./lib/IotAdaptor');
 
 // load different sensor module depending on platform
 if (process.arch === 'arm') {
@@ -16,6 +17,7 @@ var SENSOR_TYPE;
 var SENSOR_PIN;
 var SENSOR_DEVICE_NAME;
 let sensor;
+let iot;
 
 
 function postData(deviceName, temperature, humidity) {
@@ -37,7 +39,7 @@ function recordReading() {
     sensor.getSensorReading()
         .then((result) => {
             console.log(result.temperature, result.humidity);
-            postData(SENSOR_DEVICE_NAME,
+            iot.publish(
                 result.temperature.toFixed(2),
                 result.humidity.toFixed(2));
         }, (error) => {
@@ -58,6 +60,10 @@ SENSOR_DEVICE_NAME = config.deviceName;
 
 
 sensor = new Sensor(sensorLib, SENSOR_TYPE, SENSOR_PIN);
+
+// instantiate AWS IoT wrapper
+iot = new IotAdaptor(config);
+iot.connect();
 
 // start temperature loop
 recordReading();

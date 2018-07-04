@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-iot-device-sdk": "^2.2.1",
     "fs-extra": "^4.0.1",
     "node-dht-sensor": "0.0.32"
   }

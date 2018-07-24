@@ -1,6 +1,7 @@
 let sensorLib;
 var http = require('http');
 var fs = require('fs-extra');
+const path = require('path');
 const Sensor = require('./lib/Sensor');
 const IotAdaptor = require('./lib/IotAdaptor');
 
@@ -47,9 +48,8 @@ function recordReading() {
         });
 }
 
-if (!fs.pathExistsSync('./config.json')) {
-    console.error(`Missing config.json file!`
-        `Copy example.config.json to config.json`);
+if (!fs.pathExistsSync(path.resolve(__dirname, 'config.json'))) {
+    console.error(`Missing config.json file! Copy example.config.json to config.json`);
     process.exit(1);
 }
 
